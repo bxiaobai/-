@@ -31,13 +31,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-
     @Override
     public CommonResult login(String name, String password) {
 
         log.info("登录请求进行中..........................");
         User user = query().eq("name", name).one();
-
 
 
         if (user == null){
