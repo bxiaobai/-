@@ -1,0 +1,25 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: gateway-service
+
+#网关
+  cloud:
+    gateway:
+      discovery: # 配置网关发现机制
+        locator: # 配置处理机制
+          # 只要请求地址符合规则： http://gatewayIP:gatewayPort/微服务名称/微服务请求地址
+          # 网关自动映射。把请求转发到 http://微服务名称/微服务请求地址
+          # 如：有微服务，命名是service-one
+          # 请求地址是： http://localhost:9999/service-one/nacos/test
+          # 自动转发到： http://service-one/nacos/test
+          # 商业开发中，enabled一般不设置，使用默认值false。避免不必要的自动转发规则
+          enabled: true # 开启网关自动映射处理逻辑
+          lower-case-service-id: true # 开启小写转换
+
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        namespace: TEST
